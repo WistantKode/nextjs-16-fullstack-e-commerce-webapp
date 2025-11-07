@@ -1,9 +1,9 @@
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import {Blog, SINGLE_BLOG_QUERYResult} from "@/sanity.types";
+import {Blogcategory, SINGLE_BLOG_QUERYResult} from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
-    getBlogCategories,
+    getBlogCategoriesWithCount,
     getOthersBlog,
     getSingleBlog,
 } from "@/sanity/queries";
@@ -14,6 +14,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+
+// Définir le type pour les catégories de blog avec le compte d'articles
+type BlogCategoryWithCount = Blogcategory & { count: number };
 
 const SingleBlogPage = async ({
                                   params,
@@ -195,37 +198,29 @@ const SingleBlogPage = async ({
 };
 
 const BlogLeft = async ({ slug }: { slug: string }) => {
-    const categories = await getBlogCategories();
+    const categories = await getBlogCategoriesWithCount();
     const blogs = await getOthersBlog(slug, 5);
-
 
     return (
         <div>
             <div className="border border-lightColor p-5 rounded-md">
                 <Title className="text-base">Blog Categories</Title>
                 <div className="space-y-2 mt-2">
-
-                    {categories?.map(({ blogcategories }, index) => {
-                        if (!blogcategories || blogcategories.length === 0) {
-                            return null;
-                        }
-                        return (
-                            <div
-                                key={index}
-                                className="text-lightColor flex items-center justify-between text-sm font-medium"
-                            >
-
-                                <p>{blogcategories[0]?.title}</p>
-                                <p className="text-darkColor font-semibold">{`(1)`}</p>
-                            </div>
-                        )
-                    })}
+                    {categories?.map((category: BlogCategoryWithCount) => (
+                        <div
+                            key={category._id}
+                            className="text-lightColor flex items-center justify-between text-sm font-medium"
+                        >
+                            <p>{category.title}</p>
+                            <p className="text-darkColor font-semibold">{`(${category.count})`}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className="border border-lightColor p-5 rounded-md mt-10">
                 <Title className="text-base">Latest Blogs</Title>
                 <div className="space-y-4 mt-4">
-                    {blogs?.map((blog: Blog, index: number) => (
+                    {blogs?.map((blog, index: number) => (
                         <Link
                             href={`/blog/${blog?.slug?.current}`}
                             key={index}
