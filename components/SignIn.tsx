@@ -1,6 +1,7 @@
 "use client";
 import {SignInButton} from "@clerk/nextjs";
 import React from "react";
+import {PersonStandingIcon} from "lucide-react";
 
 const SignIn = () => {
     return (

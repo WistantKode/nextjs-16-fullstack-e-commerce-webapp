@@ -15,11 +15,11 @@ const Logo = ({
                 "text-2xl text-shop_dark_green font-black tracking-wider hover:text-shop_light_green cursor-pointer hoverEffect group font-sans",
                 className
             )}>
-                WIS<span className={cn(
+                Shop<span className={cn(
                 "text-shop_light_green group-hover:text-darkColor hoverEffect",
                 spanDesign
             )}>
-            TANT
+            DO
         </span>
             </h2>
         </Link>

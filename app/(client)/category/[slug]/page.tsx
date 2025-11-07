@@ -1,9 +1,11 @@
 import Container from '@/components/Container'
 import Title from '@/components/Title'
+import {getCategories} from '@/sanity/queries'
 import React from 'react'
 import CategoryProducts from "@/components/CategoryProducts";
 
 const CategoryPage = async ({params}:{params:Promise<{slug:string}>}) => {
+    const categories = await getCategories
     const {slug} = await params
 
 

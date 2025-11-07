@@ -1,6 +1,6 @@
 import {sanityFetch} from "@/sanity/lib/live";
 import {
-    BLOG_CATEGORIES_QUERY,
+    BLOG_CATEGORIES,
     BRAND_QUERY,
     BRANDS_QUERY,
     DEAL_PRODUCTS,
@@ -110,7 +110,7 @@ const getAllBlogs = async (quantity: number) => {
         });
         return data ?? [];
     } catch (error) {
-        console.log("Error fetching all blogs:", error);
+        console.log("Error fetching all brands:", error);
         return [];
     }
 };
@@ -121,20 +121,20 @@ const getSingleBlog = async (slug: string) => {
             query: SINGLE_BLOG_QUERY,
             params: { slug },
         });
-        return data ?? null;
+        return data ?? [];
     } catch (error) {
-        console.log("Error fetching single blog:", error);
-        return null;
+        console.log("Error fetching all brands:", error);
+        return [];
     }
 };
-const getBlogCategoriesWithCount = async () => {
+const getBlogCategories = async () => {
     try {
         const { data } = await sanityFetch({
-            query: BLOG_CATEGORIES_QUERY,
+            query: BLOG_CATEGORIES,
         });
         return data ?? [];
     } catch (error) {
-        console.log("Error fetching blog categories:", error);
+        console.log("Error fetching all brands:", error);
         return [];
     }
 };
@@ -147,7 +147,7 @@ const getOthersBlog = async (slug: string, quantity: number) => {
         });
         return data ?? [];
     } catch (error) {
-        console.log("Error fetching other blogs:", error);
+        console.log("Error fetching all brands:", error);
         return [];
     }
 };
@@ -161,6 +161,6 @@ export {
     getMyOrders,
     getAllBlogs,
     getSingleBlog,
-    getBlogCategoriesWithCount,
+    getBlogCategories,
     getOthersBlog,
 };
