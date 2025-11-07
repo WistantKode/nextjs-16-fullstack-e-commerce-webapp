@@ -110,7 +110,7 @@ const getAllBlogs = async (quantity: number) => {
         });
         return data ?? [];
     } catch (error) {
-        console.log("Error fetching all brands:", error);
+        console.log("Error fetching all blogs:", error);
         return [];
     }
 };
@@ -121,10 +121,10 @@ const getSingleBlog = async (slug: string) => {
             query: SINGLE_BLOG_QUERY,
             params: { slug },
         });
-        return data ?? [];
+        return data ?? null;
     } catch (error) {
-        console.log("Error fetching all brands:", error);
-        return [];
+        console.log("Error fetching single blog:", error);
+        return null;
     }
 };
 const getBlogCategories = async () => {
