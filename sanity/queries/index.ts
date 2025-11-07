@@ -1,6 +1,6 @@
 import {sanityFetch} from "@/sanity/lib/live";
 import {
-    BLOG_CATEGORIES,
+    BLOG_CATEGORIES_QUERY,
     BRAND_QUERY,
     BRANDS_QUERY,
     DEAL_PRODUCTS,
@@ -127,10 +127,10 @@ const getSingleBlog = async (slug: string) => {
         return null;
     }
 };
-const getBlogCategories = async () => {
+const getBlogCategoriesWithCount = async () => {
     try {
         const { data } = await sanityFetch({
-            query: BLOG_CATEGORIES,
+            query: BLOG_CATEGORIES_QUERY,
         });
         return data ?? [];
     } catch (error) {
@@ -161,6 +161,6 @@ export {
     getMyOrders,
     getAllBlogs,
     getSingleBlog,
-    getBlogCategories,
+    getBlogCategoriesWithCount,
     getOthersBlog,
 };

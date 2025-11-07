@@ -54,13 +54,10 @@ const SINGLE_BLOG_QUERY =
   },
 }`);
 
-const BLOG_CATEGORIES = defineQuery(
-    `*[_type == "blog"]{
-     blogcategories[]->{
-    ...
-    }
-  }`
-);
+const BLOG_CATEGORIES_QUERY = defineQuery(`*[_type == 'blogCategory']{
+  ...,
+  "count": count(*[_type == 'blog' && references(^._id)])
+}`);
 
 const OTHERS_BLOG_QUERY = defineQuery(`*[
   _type == "blog"
@@ -90,6 +87,6 @@ export {
     MY_ORDERS_QUERY,
     GET_ALL_BLOG,
     SINGLE_BLOG_QUERY,
-    BLOG_CATEGORIES,
+    BLOG_CATEGORIES_QUERY,
     OTHERS_BLOG_QUERY,
 };
