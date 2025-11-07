@@ -1,0 +1,21 @@
+# Dépendances
+/node_modules
+
+# Fichiers de build Next.js
+/.next/
+/out/
+
+# Fichiers d'environnement
+.env
+.env.local
+
+# Dossiers IDE
+.idea/
+
+# Fichiers de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Système d'exploitation
+.DS_Store
