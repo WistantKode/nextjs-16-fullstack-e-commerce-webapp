@@ -1,12 +1,11 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import React from "react";
-import {ClerkProvider} from "@clerk/nextjs";
-
+import { ClerkProvider } from "@clerk/nextjs";
+import { MenuProvider } from "@/components/MenuProvider";
 
 export const metadata: Metadata = {
-
     title: {
         template: "%s - ShopDO online store",
         default: "ShopDO online store",
@@ -20,12 +19,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-            <ClerkProvider>
+        <ClerkProvider>
+            <MenuProvider>
                 <div className="flex flex-col min-h-screen">
-                    <Header/>
+                    <Header />
                     <main className="flex-1">{children}</main>
-                    <Footer/>
+                    <Footer />
                 </div>
-            </ClerkProvider>
+            </MenuProvider>
+        </ClerkProvider>
     );
 }

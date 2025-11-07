@@ -5,11 +5,11 @@ import ProductCard from "./ProductCard";
 import {motion, AnimatePresence} from "motion/react";
 import {client} from "@/sanity/lib/client";
 import NoProductAvailable from "./NoProductAvailable";
-import {Loader2} from "lucide-react";
 import Container from "./Container";
 import HomeTabbar from "./HomeTabbar";
 import {productType} from "@/constants/data";
 import {Product} from "@/sanity.types";
+import {Skeleton} from "@/components/ui/skeleton";
 
 const ProductGrid = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -40,12 +40,16 @@ const ProductGrid = () => {
         <Container className="flex flex-col lg:px-0 my-10">
             <HomeTabbar selectedTab={selectedTab} onTabSelect={setSelectedTab}/>
             {loading ? (
-                <div
-                    className="flex flex-col items-center justify-center py-10 min-h-80 space-y-4 text-center bg-gray-100 rounded-lg w-full mt-10">
-                    <motion.div className="flex items-center space-x-2 text-green-950">
-                        <Loader2 className="w-5 h-5 animate-spin"/>
-                        <span>Product is loading...</span>
-                    </motion.div>
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
+                    {Array.from({length: 10}).map((_, index) => (
+                        <div key={index} className="flex flex-col space-y-3">
+                            <Skeleton className="h-[280px] w-full rounded-xl"/>
+                            <div className="space-y-2">
+                                <Skeleton className="h-4 w-[200px]"/>
+                                <Skeleton className="h-4 w-[150px]"/>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             ) : products?.length ? (
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
